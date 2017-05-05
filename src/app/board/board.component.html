@@ -1,0 +1,8 @@
+<div class="mode-selection">
+    <div *ngFor="let row of board" class="row">
+        <div *ngFor="let cell of row" class="cell" [class.selected]="cell.active" (click)="cellClicked(cell)">
+
+        </div>
+    </div>
+
+</div>
