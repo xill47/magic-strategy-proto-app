@@ -1,3 +1,4 @@
+import { Cell } from '../cell';
 import { Unit } from '../unit';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,30 +8,23 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-    board: BoardCell[][];
+    board: Cell[][];
+    boardHeight = 9;
+    boardWidgth = 9;
 
     constructor() { }
 
     ngOnInit() {
-        const boardMaxHeight = 9;
-        const boardMaxWidgth = 9;
-
-        this.board = new Array(boardMaxHeight);
+        this.board = new Array(this.boardHeight);
         for (let i = 0; i < this.board.length; i++) {
-            this.board[i] = new Array(boardMaxWidgth);
+            this.board[i] = new Array(this.boardWidgth);
             for (let j = 0; j < this.board[i].length; j++) {
                 this.board[i][j] = { active: true };
             }
         }
     }
 
-    cellClicked(cell: BoardCell) {
+    cellClicked(cell: Cell) {
         cell.active = !cell.active;
     }
-
-}
-
-interface BoardCell {
-    active: boolean;
-
 }
