@@ -6,12 +6,30 @@
 
 .cell {
     display: inline-block;
+    text-align: center;
     height: 100%;
     width: 60px;
     margin-left: 4px;
     border: solid red 1px;
 }
 
+.cell-unit {
+    position: absolute;
+    font-size: 12px;
+    margin: 6px;
+    height: 48px;
+    width: 48px;
+}
+
 .mode-selection .selected {
     background-color: aqua;
+}
+
+.mode-units .selected {
+    background-color: lightgreen;
+}
+
+select {
+    margin-top: 5px;
+    margin-left: 4px;
 }

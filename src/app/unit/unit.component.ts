@@ -1,3 +1,4 @@
+import { UnitService } from '../unit.service';
 import { Unit } from '../unit';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,17 +8,12 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./unit.component.css']
 })
 export class UnitComponent implements OnInit {
-    unit: Unit = {
-        attack: 2,
-        health: 3,
-        maxHealth: 3,
-        name: 'Test unit',
-        speed: 3
-    };
+    unit: Unit;
 
-    constructor() { }
+    constructor(private unitService: UnitService) { }
 
     ngOnInit() {
+        this.unitService.selectedUnit.subscribe(x => this.unit = x);
     }
 
 }

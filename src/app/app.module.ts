@@ -10,6 +10,7 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { UnitComponent } from './unit/unit.component';
 import { BoardComponent } from './board/board.component';
+import { UnitService } from 'app/unit.service';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,9 @@ import { BoardComponent } from './board/board.component';
         MaterialModule,
         BrowserAnimationsModule
     ],
-    providers: [],
+    providers: [
+        UnitService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
