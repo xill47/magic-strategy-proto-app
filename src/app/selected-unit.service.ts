@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class UnitService {
+export class SelectedUnitService {
     private unit: Subject<Unit> = new Subject();
 
     get selectedUnit(): Observable<Unit> {

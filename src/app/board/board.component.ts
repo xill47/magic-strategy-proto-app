@@ -1,4 +1,4 @@
-import { UnitService } from '../unit.service';
+import { SelectedUnitService } from '../selected-unit.service';
 import { BoardState } from '../board-state.enum';
 import { Cell } from '../cell';
 import { Unit } from '../unit';
@@ -12,14 +12,15 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
     board: Cell[][];
     boardHeight = 9;
-    boardWidgth = 9;
+    boardWidth = 9;
+    cellSize = 60;
     currentState: BoardState;
     BoardState = BoardState;
     boardStateOptions: string[];
     selectedUnit: Unit;
     selectedCell: Cell;
 
-    constructor(private service: UnitService) { }
+    constructor(private service: SelectedUnitService) { }
 
     ngOnInit() {
         this.boardStateOptions = Object.keys(BoardState);
@@ -27,9 +28,10 @@ export class BoardComponent implements OnInit {
 
         this.board = new Array(this.boardHeight);
         for (let i = 0; i < this.board.length; i++) {
-            this.board[i] = new Array(this.boardWidgth);
+            this.board[i] = new Array(this.boardWidth);
             for (let j = 0; j < this.board[i].length; j++) {
-                this.board[i][j] = { active: true };
+                const active = Math.min(i, this.boardHeight - i - 1) + Math.min(j, this.boardWidth - j - 1) > 2;
+                this.board[i][j] = { active };
             }
         }
         this.service.selectedUnit.subscribe(x => this.selectedUnit = x);
@@ -69,6 +71,16 @@ export class BoardComponent implements OnInit {
                 }
             }
         }
+    }
+
+    unselectCell() {
+        this.selectedCell = null;
+        this.service.selectUnit(null);
+    }
+
+    clearCell() {
+        this.selectedCell.unit = null;
+        this.service.selectUnit(null);
     }
 
     changeState(stateName: string) {

@@ -1,15 +1,11 @@
 .row {
-    height: 60px;
-    margin-top: 4px;
     float: left;
+    clear: left;
 }
 
 .cell {
     display: inline-block;
     text-align: center;
-    height: 100%;
-    width: 60px;
-    margin-left: 4px;
     border: solid red 1px;
 }
 
@@ -19,14 +15,19 @@
     margin: 6px;
     height: 48px;
     width: 48px;
+    overflow: hidden;
 }
 
-.mode-selection .selected {
+.mode-selection .active {
     background-color: aqua;
 }
 
-.mode-units .selected {
+.mode-units .active {
     background-color: lightgreen;
+}
+
+.mode-units .selected {
+    background-color: aquamarine;
 }
 
 select {

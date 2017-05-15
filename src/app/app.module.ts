@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 import 'hammerjs';
 import { MaterialModule } from '@angular/material';
@@ -10,7 +11,7 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { UnitComponent } from './unit/unit.component';
 import { BoardComponent } from './board/board.component';
-import { UnitService } from 'app/unit.service';
+import { SelectedUnitService } from 'app/selected-unit.service';
 
 @NgModule({
     declarations: [
@@ -23,10 +24,11 @@ import { UnitService } from 'app/unit.service';
         FormsModule,
         HttpModule,
         MaterialModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ClickOutsideModule
     ],
     providers: [
-        UnitService
+        SelectedUnitService
     ],
     bootstrap: [AppComponent]
 })
