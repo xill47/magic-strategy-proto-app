@@ -1,0 +1,15 @@
+<div class="unit-container container" *ngIf="unit">
+    <md-input-container>
+        <input mdInput type="text" [(ngModel)]="unit.name" name="name" placeholder="Name">
+    </md-input-container>
+    <md-input-container>
+        <input mdInput type="number" [(ngModel)]="unit.speed" name="speed" placeholder="Speed">
+    </md-input-container>
+    <md-input-container>
+        <input mdInput type="number" [(ngModel)]="unit.attack" name="attack" placeholder="Attack">
+    </md-input-container>
+    <md-input-container>
+        <input mdInput type="number" [(ngModel)]="unit.health" name="health" placeholder="Health">
+    </md-input-container>
+    <button md-button (click)="destroyUnit()">Destroy</button>
+</div>
