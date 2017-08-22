@@ -13,7 +13,7 @@ export class BoardComponent implements OnInit {
     board: Cell[][];
     boardHeight = 9;
     boardWidth = 9;
-    cellSize = 60;
+    cellSize = 100;
     currentState: BoardState;
     BoardState = BoardState;
     boardStateOptions: string[];
@@ -35,6 +35,11 @@ export class BoardComponent implements OnInit {
             }
         }
         this.service.selectedUnit.subscribe(x => this.selectedUnit = x);
+        this.service.destroyedUnit.subscribe(x => {
+            this.selectedCell.unit = null;
+            this.selectedCell = null;
+            this.service.selectUnit(null);
+        })
         this.currentState = BoardState.Units;
     }
 
@@ -45,32 +50,37 @@ export class BoardComponent implements OnInit {
         if (this.currentState === BoardState.Units) {
             if (!cell.active) { return; }
             if (!cell.unit) { // no unit
-                if (!this.selectedUnit) { // no selected unit => spawn unit
-                    cell.unit = {
-                        attack: 1,
-                        health: 1,
-                        name: 'Unit',
-                        speed: 1
-                    }
-                    this.selectedCell = cell;
-                    this.service.selectUnit(cell.unit);
-                } else { // selected unit => move
-                    this.selectedCell.unit = null;
-                    this.selectedCell = cell;
-                    cell.unit = this.selectedUnit;
+                cell.unit = {
+                    attack: 1,
+                    health: 1,
+                    name: 'Unit',
+                    speed: 1
                 }
+                this.selectedCell = cell;
+                this.service.selectUnit(cell.unit);
             } else { // there's unit in the cell
                 if (cell.unit === this.selectedUnit) {
                     this.selectedCell = null;
                     this.service.selectUnit(null);
-                } else if (this.selectedUnit) { // selected unit => attack
-                    cell.unit.health -= this.selectedUnit.attack;
                 } else {
                     this.selectedCell = cell;
                     this.service.selectUnit(cell.unit);
                 }
             }
         }
+    }
+
+    cellRightClicked(cell: Cell) {
+        if (this.currentState === BoardState.Units && cell.active) {
+            if (cell.unit) {
+                cell.unit.health -= this.selectedUnit.attack;
+            } else {
+                this.selectedCell.unit = null;
+                this.selectedCell = cell;
+                cell.unit = this.selectedUnit;
+            }
+        }
+        return false;
     }
 
     unselectCell() {

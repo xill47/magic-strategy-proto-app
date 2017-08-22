@@ -11,7 +11,8 @@
                 [style.height.px]="cellSize"
                 [style.margin-left.px]="cellSize / 15"
                 [style.width.px]="cellSize"
-                (click)="cellClicked(cell)">
+                (click)="cellClicked(cell)"
+                (contextmenu)="cellRightClicked(cell)">
                 <div class="cell-unit" *ngIf="cell?.unit as unit"
                     [style.margin.px]="cellSize / 10"
                     [style.height.px]="cellSize - (cellSize / 5)"

@@ -16,4 +16,7 @@ export class UnitComponent implements OnInit {
         this.unitService.selectedUnit.subscribe(x => this.unit = x);
     }
 
+    destroyUnit() {
+        this.unitService.destroyUnit(this.unit);
+    }
 }

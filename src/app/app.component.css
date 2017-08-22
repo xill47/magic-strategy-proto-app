@@ -3,7 +3,9 @@ app-board {
 }
 
 app-unit {
-    display: inline-block;
+    position: fixed;
+    top: 15px;
+    width: 256px;
     vertical-align: top;
     margin-left: 32px;
 }
